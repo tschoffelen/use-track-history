@@ -1,7 +1,7 @@
 {
   "name": "use-track-history",
   "version": "1.0.0",
-  "description": "A React hook to track state history",
+  "description": "React hook to track state with undo/redo.",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

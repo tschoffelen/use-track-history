@@ -1,20 +1,38 @@
 import { useState, useCallback, useMemo, useRef } from "react";
 
+/**
+ * History control object with undo/redo operations and state information
+ */
 export interface History {
+  /** Move back to the previous state in history */
   undo: () => void;
+  /** Move forward to the next state in history */
   redo: () => void;
-  canUndo: () => boolean;
-  canRedo: () => boolean;
+  /** Whether undo operation is available (true if not at the beginning of history) */
+  canUndo: boolean;
+  /** Whether redo operation is available (true if not at the end of history) */
+  canRedo: boolean;
+  /** Total number of history entries */
   length: number;
 }
 
+/**
+ * Return type of the useTrackHistory hook
+ */
 export interface HistoryState<T> {
+  /** Current value at the current history pointer position */
   value?: T;
+  /** Updates the value and adds it to history */
   update: (newValue: T) => void;
+  /** Clears history and sets a new initial value */
   reset: (newValue?: T) => void;
+  /** History controls and state information */
   history: History;
 }
 
+/**
+ * Configuration options for the useTrackHistory hook
+ */
 export interface TrackHistoryOptions {
   /**
    * Maximum number of history states to keep in memory.
@@ -23,6 +41,32 @@ export interface TrackHistoryOptions {
   maxHistorySize?: number;
 }
 
+/**
+ * React hook for tracking state history with undo/redo functionality
+ * 
+ * @param defaultValue - Initial value to store in history
+ * @param options - Configuration options for history behavior
+ * @returns Object containing current value, update/reset functions, and history controls
+ * 
+ * @example
+ * ```tsx
+ * const { value, update, reset, history } = useTrackHistory('Initial text');
+ * 
+ * // Update value
+ * update('New text');
+ * 
+ * // Undo/redo
+ * history.undo();
+ * history.redo();
+ * 
+ * // Check if undo/redo is available
+ * console.log(history.canUndo); // boolean
+ * console.log(history.canRedo); // boolean
+ * 
+ * // Reset history
+ * reset('Start over');
+ * ```
+ */
 export function useTrackHistory<T>(
   defaultValue?: T, 
   options: TrackHistoryOptions = {}
@@ -124,8 +168,8 @@ export function useTrackHistory<T>(
   const historyObject = useMemo(() => ({
     undo,
     redo,
-    canUndo: () => historyPointer > 0,
-    canRedo: () => historyPointer < history.length - 1,
+    canUndo: historyPointer > 0,
+    canRedo: historyPointer < history.length - 1,
     length: history.length,
   }), [undo, redo, historyPointer, history.length]);
 

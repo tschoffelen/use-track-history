@@ -8,8 +8,8 @@ describe("useTrackHistory", () => {
 
     expect(result.current.value).toBe("initial text");
     expect(result.current.history.length).toBe(1);
-    expect(result.current.history.canUndo()).toBe(false);
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(false);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   it("should handle undefined default value", () => {
@@ -29,8 +29,8 @@ describe("useTrackHistory", () => {
 
     expect(result.current.value).toBe("updated text");
     expect(result.current.history.length).toBe(2);
-    expect(result.current.history.canUndo()).toBe(true);
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(true);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   it("should handle multiple updates", () => {
@@ -52,8 +52,8 @@ describe("useTrackHistory", () => {
 
     expect(result.current.value).toBe("update 3");
     expect(result.current.history.length).toBe(4); // initial + 3 updates
-    expect(result.current.history.canUndo()).toBe(true);
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(true);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   // Test undo functionality
@@ -69,8 +69,8 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("initial text");
-    expect(result.current.history.canUndo()).toBe(false);
-    expect(result.current.history.canRedo()).toBe(true);
+    expect(result.current.history.canUndo).toBe(false);
+    expect(result.current.history.canRedo).toBe(true);
   });
 
   it("should handle multiple undo operations (single transaction)", () => {
@@ -88,8 +88,8 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("update 1");
-    expect(result.current.history.canUndo()).toBe(true); // Can still undo to initial
-    expect(result.current.history.canRedo()).toBe(true); // Can redo to update 2 and 3
+    expect(result.current.history.canUndo).toBe(true); // Can still undo to initial
+    expect(result.current.history.canRedo).toBe(true); // Can redo to update 2 and 3
   });
   it("should handle multiple undo operations (separate transactions)", () => {
     const { result } = renderHook(() => useTrackHistory("initial text"));
@@ -112,8 +112,8 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("update 1");
-    expect(result.current.history.canUndo()).toBe(true); // Can still undo to initial
-    expect(result.current.history.canRedo()).toBe(true); // Can redo to update 2 and 3
+    expect(result.current.history.canUndo).toBe(true); // Can still undo to initial
+    expect(result.current.history.canRedo).toBe(true); // Can redo to update 2 and 3
   });
 
   it("should not go past the beginning of history when undoing", () => {
@@ -127,7 +127,7 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("initial text");
-    expect(result.current.history.canUndo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(false);
   });
 
   // Test redo functionality
@@ -144,8 +144,8 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("updated text");
-    expect(result.current.history.canUndo()).toBe(true);
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(true);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   it("should handle multiple redo operations", () => {
@@ -168,8 +168,8 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("update 2");
-    expect(result.current.history.canUndo()).toBe(true);
-    expect(result.current.history.canRedo()).toBe(true);
+    expect(result.current.history.canUndo).toBe(true);
+    expect(result.current.history.canRedo).toBe(true);
   });
 
   it("should not go past the end of history when redoing", () => {
@@ -184,7 +184,7 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("updated text");
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   // Test reset functionality
@@ -202,8 +202,8 @@ describe("useTrackHistory", () => {
 
     expect(result.current.value).toBe("fresh start");
     expect(result.current.history.length).toBe(1);
-    expect(result.current.history.canUndo()).toBe(false);
-    expect(result.current.history.canRedo()).toBe(false);
+    expect(result.current.history.canUndo).toBe(false);
+    expect(result.current.history.canRedo).toBe(false);
   });
 
   it("should handle reset without a new value", () => {
@@ -267,7 +267,7 @@ describe("useTrackHistory", () => {
     });
 
     expect(result.current.value).toBe("D");
-    expect(result.current.history.canRedo()).toBe(false); // C should be gone
+    expect(result.current.history.canRedo).toBe(false); // C should be gone
   });
 
   // Test with complex data types
@@ -330,7 +330,7 @@ describe("useTrackHistory", () => {
       });
 
       expect(result.current.value).toBe("state 1");
-      expect(result.current.history.canUndo()).toBe(false); // Can't go back to 'initial' anymore
+      expect(result.current.history.canUndo).toBe(false); // Can't go back to 'initial' anymore
     });
 
     it("should adjust history pointer when trimming history", () => {
@@ -368,7 +368,7 @@ describe("useTrackHistory", () => {
 
       // Should be at A, and can't go back further
       expect(result.current.value).toBe("A");
-      expect(result.current.history.canUndo()).toBe(false);
+      expect(result.current.history.canUndo).toBe(false);
     });
 
     it("should update normally when under maxHistorySize", () => {
@@ -392,7 +392,7 @@ describe("useTrackHistory", () => {
       });
 
       expect(result.current.value).toBe("initial");
-      expect(result.current.history.canUndo()).toBe(false);
+      expect(result.current.history.canUndo).toBe(false);
     });
   });
 });

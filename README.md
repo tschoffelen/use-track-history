@@ -30,11 +30,11 @@ function TextEditor() {
       <textarea value={value} onChange={(e) => update(e.target.value)} />
 
       <div className="toolbar">
-        <button onClick={history.undo} disabled={!history.canUndo()}>
+        <button onClick={history.undo} disabled={!history.canUndo}>
           Undo
         </button>
 
-        <button onClick={history.redo} disabled={!history.canRedo()}>
+        <button onClick={history.redo} disabled={!history.canRedo}>
           Redo
         </button>
 
@@ -118,14 +118,14 @@ import { useTrackHistory } from "use-track-history";
 function MyComponent() {
   const { value, update, history } = useTrackHistory("initial value");
 
-  useHotkeys("mod+z", undo, {
-    enabled: historyPointer > 0,
+  useHotkeys("mod+z", history.undo, {
+    enabled: history.canUndo,
     preventDefault: true,
   });
 
-  useHotkeys("mod+shift+z", redo, {
+  useHotkeys("mod+shift+z", history.redo, {
     // or ctrl+y on Windows
-    enabled: historyPointer < history.length - 1,
+    enabled: history.canRedo,
     preventDefault: true,
   });
 
