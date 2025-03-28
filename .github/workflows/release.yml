@@ -6,8 +6,13 @@ on:
 
 jobs:
   test:
-    name: Run tests
+    name: Run tests (React ${{ matrix.react-version }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        react-version: [17, 18, 19]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,6 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Install specific React version
+        run: yarn add react@${{ matrix.react-version }} react-dom@${{ matrix.react-version }} --dev
 
       - name: Lint
         run: yarn lint
@@ -39,6 +47,11 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,7 +61,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: "lts/*"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
