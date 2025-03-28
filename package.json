@@ -18,7 +18,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src/ --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "semantic-release": "semantic-release"
@@ -44,16 +44,16 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.2",
     "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.0.0",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
-    "@eslint/js": "^9.0.0",
-    "typescript-eslint": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "eslint": "^9.23.0",
@@ -68,7 +68,8 @@
     "semantic-release": "^24.2.3",
     "ts-jest": "^29.0.0",
     "tslib": "^2.8.1",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^7.0.0"
   },
   "dependencies": {}
 }
