@@ -41,6 +41,8 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          INCLUDE_DECLARATIONS: true
 
   release:
     name: Release
@@ -68,6 +70,8 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          INCLUDE_DECLARATIONS: true
 
       - name: Release
         env:
