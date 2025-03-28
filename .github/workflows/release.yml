@@ -50,12 +50,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build
-        run: yarn build
-          
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-          
+
+      - name: Build
+        run: yarn build
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
