@@ -1,14 +1,21 @@
 {
   "name": "use-track-history",
-  "version": "1.0.0",
-  "description": "React hook to track state with undo/redo.",
+  "version": "0.0.0-development",
+  "description": "React hook to track state history with undo/redo functionality",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
